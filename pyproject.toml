@@ -1,0 +1,22 @@
+[tool.poetry]
+name = "seq2seq-sort"
+version = "0.1.0"
+description = ""
+authors = ["Jay Mody <jaykmody@gmail.com>"]
+
+[tool.poetry.dependencies]
+python = "^3.9"
+numpy = "^1.22.3"
+torch = "^1.11.0"
+pytorch-lightning = "^1.6.2"
+tqdm = "^4.64.0"
+
+[tool.poetry.dev-dependencies]
+black = "^22.3.0"
+pylint = "^2.13.8"
+isort = "^5.10.1"
+ipykernel = "^6.13.0"
+
+[build-system]
+requires = ["poetry-core>=1.0.0"]
+build-backend = "poetry.core.masonry.api"
