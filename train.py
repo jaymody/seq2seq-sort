@@ -7,7 +7,7 @@ from pytorch_lightning.callbacks import ModelCheckpoint
 from torch.utils.data import DataLoader
 from tqdm import tqdm
 
-from data import CharSortedDataset, SimpleDataset, train_test_split
+from data import CharSortedDataset, SimpleDataset
 from models import Collater, Seq2Seq, pairs_to_tensors
 from tokenizers import CharTokenizer
 from utils import get_device, score, set_seed
@@ -23,8 +23,9 @@ def train(
     batch_size=512,
     num_workers=8,
     seed=1234,
-    args={},
+    args=None,
 ):
+    args = {} if args is None else args
     set_seed(seed)
 
     # TODO: is it reasonable that the vocab is only built on train pairs?
@@ -129,7 +130,7 @@ def load_model(dirpath, model_ckpt="model.ckpt"):
     return model
 
 
-if __name__ == "__main__":
+def main():
     parser = argparse.ArgumentParser("Train the model.")
     parser.add_argument("dirpath", type=str, default="models/best")
     parser.add_argument("--train_N", type=int, default=100000)
@@ -159,3 +160,7 @@ if __name__ == "__main__":
         seed=args.seed,
         args=args,
     )
+
+
+if __name__ == "__main__":
+    main()

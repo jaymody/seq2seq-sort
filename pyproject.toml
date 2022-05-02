@@ -20,3 +20,10 @@ ipykernel = "^6.13.0"
 [build-system]
 requires = ["poetry-core>=1.0.0"]
 build-backend = "poetry.core.masonry.api"
+
+[tool.isort]
+profile = "black"
+
+[tool.pylint.messages_control]
+disable = ["C", "R", "unspecified-encoding"]
+generated-members = ["torch"]

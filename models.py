@@ -69,7 +69,7 @@ class Seq2Seq(pl.LightningModule):
         dec_dropout=0.1,
         lr=0.0005,
         **kwargs,
-    ):
+    ):  # pylint: disable=unused-argument
         super().__init__()
 
         self.save_hyperparameters()
@@ -141,7 +141,7 @@ class Seq2Seq(pl.LightningModule):
 
         return trg_mask
 
-    def forward(self, src, trg):
+    def forward(self, src, trg):  # pylint: disable=arguments-differ
 
         # src = [batch size, src len]
         # trg = [batch size, trg len]
@@ -275,7 +275,7 @@ class Seq2Seq(pl.LightningModule):
     def configure_optimizers(self):
         return torch.optim.Adam(self.parameters(), lr=self.hparams.lr)
 
-    def training_step(self, batch, batch_idx):
+    def training_step(self, batch, batch_idx):  # pylint: disable=W0221,W0613
         src, trg = batch
 
         output, _ = self(src, trg[:, :-1])
@@ -295,7 +295,7 @@ class Seq2Seq(pl.LightningModule):
         self.log("train_loss", loss)
         return loss
 
-    def validation_step(self, batch, batch_idx):
+    def validation_step(self, batch, batch_idx):  # pylint: disable=W0221,W0613
         src, trg = batch
 
         output, _ = self(src, trg[:, :-1])
@@ -315,7 +315,7 @@ class Seq2Seq(pl.LightningModule):
         self.log("val_loss", loss, prog_bar=True)
         return loss
 
-    def test_step(self, batch, batch_idx):
+    def test_step(self, batch, batch_idx):  # pylint: disable=arguments-differ
         return self.validation_step(batch, batch_idx)
 
     @staticmethod
