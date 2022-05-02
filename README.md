@@ -103,3 +103,31 @@ poetry run python predict.py models/run1 lakjoiuc dcba acyqtb
 ```bash
 poetry run pytest tests.py
 ```
+
+**Run API:**
+```bash
+# run api
+poetry run uvicorn app:app
+
+# test api endpoint
+curl -X POST 'http://localhost:8000/api/predict' \
+    -H 'Content-Type: application/json' \
+    -H "X-API-Key: ${API_KEY}" \
+    -d '{"input_sequence":"bcdaefg"}'
+```
+Docs found at `https://localhost:8000/redoc`.
+
+**Docker Image for API:**
+```bash
+# build image
+sudo docker build -t ${SERVICE_NAME} .
+
+# run image
+docker run -it -p 8000:8000 --rm -e API_KEY=${API_KEY} ${SERVICE_NAME}
+
+# test api endpoint
+curl -X POST 'http://localhost:8000/api/predict' \
+    -H 'Content-Type: application/json' \
+    -H "X-API-Key: ${API_KEY}" \
+    -d '{"input_sequence":"bcdaefg"}'
+```
